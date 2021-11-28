@@ -1,0 +1,52 @@
+extends base
+
+mixin inputWrapper(nodeId, required, text, inputType, overrideText)
+  - var slugText = `${text.toLowerCase().split(" ").join("-")}`
+  if overrideText
+    - text = overrideText
+  div(id=`${nodeId}` class=(required === true ? 'input-wrapper required' : 'input-wrapper'))
+    label.field-label #{text}
+    input.input.w-input(id=`${slugText}` type=`${inputType}` required=required===true maxlength="256" name=`${slugText}` data-name=`${text}` autocomplete="chrome-off")
+
+block content
+  .content-wrapper
+    .inner-content-wrapper
+      .w-container
+        .w-form
+          form#create-instant-site-form(name="Create-Instant-Site-Form" data-name="Create Instant Site Form" autocomplete="chrome-off")
+            .instant-step-text STEP 1 : Enter the Business Owner's Contact Information
+            .instant-site-contact-fields
+              +inputWrapper("w-node-8c456c9f98b9-4bd75eb3", true, "Business Name", "text")
+              +inputWrapper("w-node-4f5b949bcdc6-4bd75eb3", false, "First Name", "text")
+              +inputWrapper("w-node-e2c5c05e15da-4bd75eb3", false, "Last Name", "text")
+              +inputWrapper("w-node-c1e236ba4805-4bd75eb3", true, "Phone Number", "tel", "(XXX) XXX-XXXX")
+              +inputWrapper("w-node-82d2b8d649c9-4bd75eb3", false, "Cell Phone", "tel")
+              +inputWrapper("w-node-639f7dd2a506-4bd75eb3", true, "Email", "email", "email@example.com")
+              #w-node-5f89a79fc361-4bd75eb3
+                label.w-checkbox.checkbox-field
+                  .w-checkbox-input.w-checkbox-input--inputType-custom.same-phone-checkbox
+                  input#same-phone-checkbox(type="checkbox" name="Phone-Same" data-name="Phone Same" style="opacity:0;position:absolute;z-index:-1")
+                  span.checkbox-label.w-form-label(for="Phone Same") Cell and Business Number are the same
+              #w-node-5f89a79fc366-4bd75eb3.spacer
+              +inputWrapper("w-node-e050658d96a7-4bd75eb3", true, "Street Address", "text")
+              +inputWrapper("w-node-9dbf63ab1886-4bd75eb3", false, "Suite", "text", "Suite, Apt, Room #")
+              +inputWrapper("", true, "City", "text")
+              +inputWrapper("", true, "State", "text")
+              +inputWrapper("", true, "Zip", "text", "Zip/Postal Code")
+              +inputWrapper("", false, "Country", "text")
+            .instant-step-text STEP 2 : Select the template you wish to create
+            input#search.input.search.w-input(type="text" maxlength="256" name="Search" data-name="Search" placeholder="Search")
+            .instant-site-radio-wrapper
+              .niche-collection-list
+                each industry in industries
+                  .niche-collection-item
+                    .instant-card-embed.w-embed
+                      label.radio-button-field(style="margin-bottom: 0px;")
+                        input.w-form-formradioinput.radio-button.w-radio-input(type="radio" data-name="Industry" id=`${industry.name}` name="Industry" value=`${industry.name}` style="display:none" required="")
+                        .instant-card-wrapper
+                          .instant-site-card-thumbnail(style=`background-image:url(/images/industries-thumbnail/${industry.name.toLowerCase().split(" ").join("%20")}.png);border-color:${industry.color}`)
+                            .check-badge
+                              img.check(src="/images/Check.png" alt="Check")
+                          .instant-card-bottom
+                            h2.instant-h2 #{industry.name}
+            input#submit.blue-gradient-button.w-button(type="submit" value="Create Website" data-wait="Please wait...")

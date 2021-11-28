@@ -1,0 +1,55 @@
+extends base
+
+mixin tableHeadData(name, sortable, label, field)
+  if sort == field
+    - var active = true
+  else
+    - var active = false
+  th(data-sortable=`${sortable}` data-sort-label=`${label}` data-field=`${field}` data-active=`${active}`)
+    div
+      | #{name}
+      if active == true && order == "asc"
+        span.material-icons.head arrow_upward
+      else
+        span.material-icons.head arrow_downward
+
+block content
+  .content-wrapper
+    .content-top
+      .form-block.w-form
+        form#search-form.form(name="Search-Form" data-name="Search Form")
+          .instant-site-search-wrapper
+            input#Chromebook-Search-Input.instant-site-search-input.w-input(type="text" maxlength="256" name="Chromebook-Search-Input" data-name="Chromebook Search Input" placeholder="Search")
+            a.search-icon-wrapper.w-inline-block(href="#")
+              .w-embed
+                svg#Capa_1(version="1.1" fill="currentColor" width="12" height="12" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewbox="0 0 489.713 489.713" style="enable-background:new 0 0 489.713 489.713;" xml:space="preserve")
+                  g
+                    path(d="M483.4,454.444l-121.3-121.4c28.7-35.2,46-80,46-128.9c0-112.5-91.5-204.1-204.1-204.1S0,91.644,0,204.144\
+                    s91.5,204,204.1,204c48.8,0,93.7-17.3,128.9-46l121.3,121.3c8.3,8.3,20.9,8.3,29.2,0S491.8,462.744,483.4,454.444z M40.7,204.144\
+                    c0-90.1,73.2-163.3,163.3-163.3s163.4,73.3,163.4,163.4s-73.3,163.4-163.4,163.4S40.7,294.244,40.7,204.144z")
+      a.add-button.w-button(href="/instant-sites/sites/new") + Create New Instant Site
+    .database-wrapper.w-embed
+      table#sites-table.database-table(style="width:100%")
+        thead
+          tr
+            +tableHeadData("Business Name", true, 1, "businessName")    
+            +tableHeadData("Name", true, 2, "firstName")
+            +tableHeadData("Phone Number", true, 3, "phoneNumber")
+            +tableHeadData("Industry", true, 4, "industry")
+            +tableHeadData("Status", true, 5, "status")
+            +tableHeadData("Created On", true, 6, "createdAt")
+        tbody
+          each site in sites
+            tr(class=`${site.industry.toLowerCase().split(" ").join("-")}-row`)
+              td
+                a.main-name(href=`/instant-sites/sites/${site.customId}/${site.slug}`) #{site.businessName}
+              td #{site.firstName} #{site.lastName}
+              td #{site.phoneNumber}
+              td
+                a(href="#" class=`${site.industry.toLowerCase().split(" ").join("-")}-cell`) #{site.industry}
+              td
+                div(class=`${site.status.toLowerCase()}-cell`)
+                  div(class=`${site.status.toLowerCase()}-circle-site`)
+                  | #{site.status}
+              td #{site.createdAt.toLocaleDateString()}    
+        include _databaseTfoot

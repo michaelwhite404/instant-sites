@@ -1,0 +1,16 @@
+extends base
+
+mixin homeCard(href, image, ext, title, description)
+  a.home-card.w-inline-block(href=`/instant-sites/${href}`)
+    .home-card-icon
+      img(src=`/images/${image}.${ext}` loading="lazy" sizes="50px" alt="")
+    h3 #{title}
+    div #{description}
+
+block content
+  .content-wrapper
+    .content-top
+    .home-content-wrapper
+      .home-content-container
+        +homeCard("sites", "sites-search-icon", "png", "Sites", "Create, view and edit sites in the Instant Sites platform")
+        +homeCard("industries", "settings", "png", "Industries", "Create, view and edit Instant Site industries")

@@ -1,0 +1,28 @@
+extends base
+
+mixin inputWrapper(text, inputType)
+  .input-wrapper.required
+    label.field-label(for=`${text.split(" ").join("-")}`) #{text}
+    input.input.w-input(id=`${text.toLowerCase().split(" ").join("-")}` type=`${inputType}` maxlength="256" name=`${text.split(" ").join("-")}` data-name=`${text}` required="")
+
+block content
+  .content-wrapper
+    .inner-content-wrapper
+      .w-container
+        .instant-step-text Enter the new user's information here
+        .w-form
+          form#create-user-form(name="Create-User-Form" data-name="Create User Form")
+            .user-fields
+              +inputWrapper("First Name", "text")
+              +inputWrapper("Last Name", "text")
+              +inputWrapper("Title", "text")
+              +inputWrapper("Email", "email")
+              +inputWrapper("Phone Number", "tel")
+              .input-wrapper.required
+                label.field-label Role
+                select#role.input.w-select(name="Role" data-name="Role" required="")
+                  option(value="")
+                  option(value="Super Admin") Super Admin
+                  option(value="Admin") Admin
+                  option(value="Cold Caller") Cold Caller
+            input.blue-gradient-button.w-button(type="submit" value="Submit" data-wait="Please wait...")

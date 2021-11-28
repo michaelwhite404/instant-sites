@@ -1,0 +1,23 @@
+extends baseEmail
+
+block content
+  p Hey #{firstName},
+  p I wanted to take the time to build a brand new website for #{businessName}...
+  p I think I would be a great fit to handle your online marketing needs, so I decided to build you a custom website for free..
+  p #{firstName}, here is the link to #{businessName}'s brand new website:
+  table.btn.btn-primary(role='presentation', border='0', cellpadding='0', cellspacing='0')
+    tbody
+      tr
+        td(align='left')
+          table(role='presentation', border='0', cellpadding='0', cellspacing='0')
+            tbody
+              tr
+                td
+                  a(href=`${url}`, target='_blank') Your Free Website
+  p Looking forward to potentially doing buisness with you, #{firstName}
+  p P.S. Just reply back and let me know what you think of your new website when you get a sec...
+  p 
+    strong Best Regards,
+  p Michael White
+  p (202) 770-5210
+  p mike@beyondinfinitymedia.agency 

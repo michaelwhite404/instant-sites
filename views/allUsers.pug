@@ -1,0 +1,55 @@
+extends base
+
+mixin tableHeadData(name, sortable, label, field)
+  if sort == field
+    - var active = true
+  else
+    - var active = false
+  th(data-sortable=`${sortable}` data-sort-label=`${label}` data-field=`${field}` data-active=`${active}`)
+    div
+      | #{name}
+      if active == true && order == "asc"
+        span.material-icons.head arrow_upward
+      else
+        span.material-icons.head arrow_downward
+
+block content
+  .content-wrapper
+    .content-top
+      .form-block.w-form
+        form#search-form.form(name="Search-Form" data-name="Search Form")
+          .instant-site-search-wrapper
+            input#Chromebook-Search-Input.instant-site-search-input.w-input(type="text" maxlength="256" name="Chromebook-Search-Input" data-name="Chromebook Search Input" placeholder="Search")
+            a.search-icon-wrapper.w-inline-block(href="#")
+              .w-embed
+                // Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)
+                svg#Capa_1(version="1.1" fill="currentColor" width="12" height="12" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewbox="0 0 489.713 489.713" style="enable-background:new 0 0 489.713 489.713;" xml:space="preserve")
+                  g
+                    path(d="M483.4,454.444l-121.3-121.4c28.7-35.2,46-80,46-128.9c0-112.5-91.5-204.1-204.1-204.1S0,91.644,0,204.144\
+                    s91.5,204,204.1,204c48.8,0,93.7-17.3,128.9-46l121.3,121.3c8.3,8.3,20.9,8.3,29.2,0S491.8,462.744,483.4,454.444z M40.7,204.144\
+                    c0-90.1,73.2-163.3,163.3-163.3s163.4,73.3,163.4,163.4s-73.3,163.4-163.4,163.4S40.7,294.244,40.7,204.144z")
+      a.add-button.w-button(href="/users/new") + Create New User
+    .database-wrapper.w-embed
+      table#users-table.database-table(style="width:100%")
+
+        thead
+          tr
+            +tableHeadData("Full Name", true, 7, "fullName")
+            +tableHeadData("Title", true, 8, "title")
+            +tableHeadData("Email", true, 9, "email")
+            +tableHeadData("Phone Number", true, 10, "phoneNumber")
+            +tableHeadData("Status", true, 11, "status")
+        tbody
+          each user in users
+            - var status = user.active == true ? "Active" : "Inactive"
+            tr
+              td
+                a.main-name(href=`/users/${user.slug}`) #{user.fullName}
+              td #{user.title}
+              td #{user.email}
+              td #{user.phoneNumber}
+              td(style=`color:var(--${status.toLowerCase()}-color)`)
+                div(class=`${status.toLowerCase()}-circle`)
+                | #{status}
+        include _databaseTfoot      
+        

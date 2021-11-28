@@ -1,0 +1,20 @@
+.top-nav
+  if user
+    .profile-wrapper.w-dropdown(data-hover="" data-delay="0")
+      .profile-dropdown-toggle.w-dropdown-toggle
+        .profile-link-block.w-inline-block
+          img.profile-image(src="/images/alex-holyoake-F9vGbKfrfIw-unsplash.jpg" srcset="/images/alex-holyoake-F9vGbKfrfIw-unsplash-p-500.jpeg 500w, /images/alex-holyoake-F9vGbKfrfIw-unsplash-p-800.jpeg 800w, /images/alex-holyoake-F9vGbKfrfIw-unsplash-p-1080.jpeg 1080w, /images/alex-holyoake-F9vGbKfrfIw-unsplash-p-1600.jpeg 1600w, /images/alex-holyoake-F9vGbKfrfIw-unsplash.jpg 1699w" sizes="35px" alt="")
+          .text-block
+            | Hello, 
+            strong #{user.firstName}
+          .icon.w-icon-dropdown-toggle
+      nav.profile-dropdown-list.w-dropdown-list
+        #log-out-button.profile-dropdown-link.w-dropdown-link Log Out
+        a#change-password-button.profile-dropdown-link.w-dropdown-link(href="/new-password") Change Password
+        .profile-dropdown-link
+          div Dark Mode
+          .toggle-switch.w-embed
+            label.switch
+              input#dark-mode-check(type="checkbox")
+              span.slider.round
+  img.top-nav-logo(src="/images/Beyond-Infinity-Logo-Blue-Gradient.png" loading="lazy" alt="")

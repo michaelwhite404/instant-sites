@@ -1,0 +1,16 @@
+extends base
+
+mixin homeCard(href, image, ext, title, description)
+  a.home-card.w-inline-block(href=`/${href}`)
+    .home-card-icon
+      img(src=`/images/${image}.${ext}` loading="lazy" srcset=`/images/${image}-p-500.${ext} 500w, /images/${image}.${ext} 512w` sizes="50px" alt="")
+    h3 #{title}
+    div #{description}
+
+block content 
+  .content-wrapper
+    .content-top
+    .home-content-wrapper
+      .home-content-container
+        +homeCard("instant-sites", "domain", "png", "Instant Sites", "Create, view and edit Instant Sites")
+        +homeCard("users", "profile", "png", "Users", "Create, view and edit admin users")

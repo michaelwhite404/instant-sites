@@ -1,0 +1,27 @@
+extends base
+
+block content
+  .content-wrapper
+    .content-top
+      .status-wrapper
+        .active-circle
+        .status-active Active
+      a.edit-button.w-button(href=`/instant-sites/industries/${industry.slug}/edit`) Edit This Industry
+    .inner-content-wrapper
+      .w-container
+        .industry-fields
+          #w-node-faf85ee47bb3-7bd5108d.input-wrapper-copy
+            .field-label-copy Industry Name
+            .input-copy
+              div #{industry.name}
+          #w-node-83122fe5a031-7bd5108d.input-wrapper-copy
+            .field-label-copy Color
+            .input-copy
+              .industry-color-box(style=`background-color:${industry.color}`)
+              div #{industry.color}
+          #w-node-e268fed4a5fc-7bd5108d.input-wrapper-copy
+            .field-label-copy Thumbnail Image
+            .input-copy
+              a.w-inline-block(href=`/images/industries-thumbnail/${industry.name}.png` target="_blank")
+                img.industry-thumbnail-image(src=`/images/industries-thumbnail/${industry.name}.png` loading="lazy" sizes="(max-width: 767px) 24vw, 160px" alt="")
+              div #{industry.name}.png

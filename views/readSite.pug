@@ -1,0 +1,60 @@
+extends base
+
+mixin infoBlock(nodeId, label, text)
+  .input-wrapper-copy(id=`${nodeId}`)
+    .field-label-copy #{label}
+    .input-copy
+      div #{text}
+
+block content
+  - var siteLink = `http://127.0.0.1:9000/${site.industry.toLowerCase().split(" ").join("-")}/${site.customId}/${site.slug}`
+  .content-wrapper
+    .content-top
+      .status-wrapper
+        div(class=`${site.status.toLowerCase()}-circle-site`)
+        div(class=`site-status-${site.status.toLowerCase()}`) #{site.status}
+      a.edit-button.w-button(href=`/instant-sites/sites/${site.customId}/${site.slug}/edit`) Edit This Site
+    .inner-content-wrapper
+      .w-container
+        .single-site-into-container
+          +infoBlock("w-node-e9623413ba1a-6889b389","Business Name", `${site.businessName}`)
+          +infoBlock("w-node-204262042b9b-6889b389","Business Owner Name", `${site.firstName || ""} ${site.lastName || ""}`)
+          +infoBlock("w-node-486de2423f28-6889b389","Email Address", `${site.email}`)
+          +infoBlock("w-node-d5d5f834d02b-6889b389","Custom Site ID", `${site.customId}`)
+          +infoBlock("w-node-c5cd85e492df-6889b389","Industry", `${site.industry}`)
+          +infoBlock("w-node-9e81f4b47d74-6889b389","Phone Number", `${site.phoneNumber}`)
+          +infoBlock("w-node-e6d9de66647d-6889b389","Cell Phone", `${site.cellPhone || ""}`)
+          #w-node-ce0486fd3584-6889b389.spacer
+          +infoBlock("w-node-00fb44c7bc1b-6889b389","Street Address", `${site.streetAddress}`)
+          +infoBlock("w-node-3fb81941ab9f-6889b389","Suite", `${site.suite || ""}`)
+          +infoBlock("w-node-c251945c7b67-6889b389","City", `${site.city}`)
+          +infoBlock("w-node-e9ff2b589191-6889b389","State", `${site.state}`)
+          +infoBlock("w-node-d03300d360a3-6889b389","Zip/Postal Code", `${site.zip}`)
+          +infoBlock("w-node-1e4f383bac01-6889b389","Country", `${site.country}`)
+          #w-node-3841e6cc0626-6889b389.spacer
+          #w-node-a47a591878c7-6889b389.input-wrapper-copy
+            .field-label-copy Instant Site Website
+            .input-copy
+              a.instant-site-link(href=`${siteLink}` target="_blank") #{siteLink}
+          #w-node-5d3df33874ab-6889b389.input-wrapper-copy
+            .field-label-copy Change Status
+            .w-form
+              form#change-status-form.change-status-form(name="Change-Status-Form" data-name="Change Status Form")
+                select#status.input-copy.select.w-select(name="Status" data-name="Status")
+                  if site.status == "Pending"
+                    option(value="Pending" selected="") Pending
+                  else
+                    option(value="Pending") Pending
+                  if site.status == "Sold"
+                    option(value="Sold" selected="") Sold
+                  else
+                    option(value="Sold") Sold
+                  if site.status == "Declined"
+                    option(value="Declined" selected="") Declined
+                  else  
+                    option(value="Declined") Declined
+                .spacer
+                input#status-submit.edit-button.disabled.w-button(type="submit" value="Change Status" data-wait="Please wait...")
+        .client-send-information-container
+          .client-send-box
+          .client-send-box        

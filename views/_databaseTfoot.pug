@@ -1,0 +1,42 @@
+tfoot
+  tr
+    td(colspan="6")
+      .tfoot-container
+        .tfoot-left
+          .field-label.normal.inline Rows per page:
+          select.rows-picker
+            - var values = [10, 25, 50, 100]
+            if values.includes(Number(limit)) == false
+              option(selected) #{limit}
+            if limit == 10 
+              option(selected) 10
+            else
+              option 10
+            if !limit || limit == 25
+              option(selected) 25
+            else
+              option 25
+            if limit == 50 
+              option(selected) 50
+            else
+              option 50
+            if limit == 100 
+              option(selected) 100
+            else
+              option 100
+        .tfoot-right
+          .pagination-container
+            if page == 1
+              span.material-icons.first-page(data-select="false") first_page
+            else 
+              span.material-icons.first-page(data-select="true") first_page
+            span(style="color:#757575") Page #{page} of #{pages}
+            span.pagination-arrows
+              if page == 1
+                span.material-icons.prev(data-select="false" style="font-size: 18px;") arrow_back_ios
+              else 
+                span.material-icons.prev(data-select="true" data-page=`${page * 1 - 1}` style="font-size: 18px;") arrow_back_ios
+              if page == pages 
+                span.material-icons.next(data-select="false" style="font-size: 18px;") arrow_forward_ios
+              else
+                span.material-icons.next(data-select="true" data-page=`${page * 1 + 1}` style="font-size: 18px;") arrow_forward_ios 

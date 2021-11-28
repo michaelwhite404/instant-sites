@@ -1,0 +1,36 @@
+extends base
+
+mixin inputWrapper(text, inputType, value)
+  .input-wrapper.required
+    label.field-label(for=`${text.split(" ").join("-")}`) #{text}
+    input.input.w-input(id=`${text.toLowerCase().split(" ").join("-")}` type=`${inputType}` maxlength="256" name=`${text.split(" ").join("-")}` data-name=`${text}` value=`${value}` required="")
+
+block content
+  .content-wrapper
+    .inner-content-wrapper
+      .w-container
+        .w-form
+          form#edit-user-form(name="Edit-User-Form" data-name="Edit User Form" data-user-id=`${viewUser._id}`)
+            .instant-step-text Enter the new user's information here
+            .user-fields
+              +inputWrapper("First Name", "text", viewUser.firstName)
+              +inputWrapper("Last Name", "text", viewUser.lastName)
+              +inputWrapper("Title", "text", viewUser.title)
+              +inputWrapper("Email", "email", viewUser.email)
+              +inputWrapper("Phone Number", "tel", viewUser.phoneNumber)
+              .input-wrapper.required
+                label.field-label Role
+                select#role.input.w-select(name="Role" data-name="Role" required="")
+                  if viewUser.role == "Super Admin"
+                    option(value="Super Admin" selected) Super Admin
+                  else 
+                    option(value="Super Admin") Super Admin
+                  if viewUser.role == "Admin"
+                    option(value="Admin" selected) Admin
+                  else
+                    option(value="Admin") Admin
+                  if viewUser.role == "Cold Caller"
+                    option(value="Cold Caller" selected) Cold Caller
+                  else
+                    option(value="Cold Caller") Cold Caller
+            input.blue-gradient-button.w-button(type="submit" value="Submit" data-wait="Please wait...")

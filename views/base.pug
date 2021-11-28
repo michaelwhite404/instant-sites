@@ -1,0 +1,12 @@
+doctype html
+html(data-wf-page="5f55af73b6fd1a2ddd73be23" data-wf-site="5f4d86c62c2567707e524886")
+  include _head
+  body(class= (user?(user.preferredColorScheme === "dark" ? "dark" : ""):""))
+    include _sidebar
+    .full-content-wrapper
+      include _topNav
+      .main-container
+        .main-inner-container
+          h1.title-heading #{title}
+          block content
+    include _bottomScript

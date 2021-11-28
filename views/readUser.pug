@@ -1,0 +1,24 @@
+extends base
+
+mixin infoBlock(nodeId, label, text)
+  .input-wrapper-copy(id=`${nodeId}`)
+    .field-label-copy #{label}
+    .input-copy
+      div #{text}
+
+block content
+  - var status = viewUser.active == true ? "Active" : "Inactive"
+  .content-wrapper
+    .content-top
+      .status-wrapper
+        div(class=`${status.toLowerCase()}-circle`)
+        div(class=`status-${status.toLowerCase()}`) #{status}
+      a.edit-button.w-button(href=`${viewUser.slug}/edit`) Edit This User
+    .inner-content-wrapper
+      .w-container
+        .user-fields
+          +infoBlock("w-node-faf85ee47bb3-8791b380", "Full Name", viewUser.fullName)
+          +infoBlock("w-node-83122fe5a031-8791b380", "Title", viewUser.title)
+          +infoBlock("w-node-e268fed4a5fc-8791b380", "Email", viewUser.email)
+          +infoBlock("w-node-6dc5f509c828-8791b380", "Phone Number", viewUser.phoneNumber)
+          +infoBlock("w-node-f28048fa83c0-8791b380", "Role", viewUser.role)

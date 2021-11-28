@@ -1,0 +1,42 @@
+doctype html
+html
+  head
+    meta(name='viewport', content='width=device-width')
+    meta(http-equiv='Content-Type', content='text/html; charset=UTF-8')
+    title= subject
+
+    include _style
+
+  body
+    table.body(role='presentation', border='0', cellpadding='0', cellspacing='0')
+      tbody
+        tr
+          td
+          td.container
+            .content
+              // START CENTERED WHITE CONTAINER
+              table.main(role='presentation')
+
+                // START MAIN AREA
+                tbody
+                  tr
+                    td.wrapper
+                      table(role='presentation', border='0', cellpadding='0', cellspacing='0')
+                        tbody
+                          tr
+                            td
+                              // CONTENT
+                              block content
+
+              // START FOOTER
+              .footer
+                table(role='presentation', border='0', cellpadding='0', cellspacing='0')
+                  tbody
+                    tr
+                      td.content-block
+                        //- span.apple-link Beyond Infinity Media Agency
+                        //- br
+                        img(src="https://uploads-ssl.webflow.com/5c42a983fe04b162953d3f3a/5cc91412374adf4aff72875d_Beyond%20Infinity%20Logo%20Blue%20Gradient.png" width="70")
+                        
+
+          //- td  
